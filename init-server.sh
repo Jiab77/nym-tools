@@ -35,7 +35,7 @@ while [[ $# -gt 0 ]]; do
                 INSTALL_USER="$2"
                 INSTALL_PATH="/home/$INSTALL_USER/nym-binaries"
                 CLIENT_INIT_LOG="$INSTALL_PATH/nym-client-init.log"
-                PROVIDER_ADDRESS_FILE="$INSTALL_PATH/.nym-provider-address"
+                PROVIDER_ADDRESS_FILE="/home/$INSTALL_USER/.nym-provider-address"
                 shift
             fi
         ;;
