@@ -13,7 +13,7 @@
 set +o xtrace
 
 # Config
-DEBUG_MODE=true
+DEBUG_MODE=false
 INSTALL_USER="nym"
 INSTALL_PATH="/home/$INSTALL_USER"
 CLIENT_ID="requester-client"
