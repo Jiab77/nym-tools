@@ -10,7 +10,7 @@
 # Version: 0.1.0
 
 # Options
-set -o xtrace
+set +o xtrace
 
 # Config
 DEBUG_MODE=true
@@ -18,6 +18,7 @@ INSTALL_USER="nym"
 INSTALL_PATH="/home/$INSTALL_USER"
 CLIENT_ID="requester-client"
 CLIENT_INIT_LOG="$INSTALL_PATH/nym-client-init.log"
+PROVIDER_ADDRESS_FILE="$INSTALL_PATH/.nym-provider-address"
 
 # Arguments
 while [[ $# -gt 0 ]]; do
@@ -47,14 +48,16 @@ done
 
 # Process
 if [[ $DEBUG_MODE == true ]]; then
-    echo -e "[Debug] Running: .$INSTALL_PATH/nym-client init --id $CLIENT_ID &> $CLIENT_INIT_LOG &\n"
+    echo -e "[Debug] Running: $INSTALL_PATH/nym-client init --id $CLIENT_ID &> $CLIENT_INIT_LOG &\n"
 else
-    ".$INSTALL_PATH/nym-client" init --id $CLIENT_ID &> "$CLIENT_INIT_LOG" &
+    "$INSTALL_PATH/nym-client" init --id $CLIENT_ID &> "$CLIENT_INIT_LOG" &
 fi
 
-# Tests
+# Result
 if [[ $DEBUG_MODE == false ]]; then
     echo -e "\nFetching client address from log...\n"
+    sleep 2
     echo -e "Fetched: $(grep 'The address of this client is:' "$CLIENT_INIT_LOG" | awk '{ print $7 }')\n"
     echo -e "\nPlease note this address to later initialize the socks5 client with the '--provider' argument.\n"
+    echo -n "$(grep 'The address of this client is:' "$CLIENT_INIT_LOG" | awk '{ print $7 }')" > "$PROVIDER_ADDRESS_FILE"
 fi
