@@ -56,7 +56,7 @@ done
 
 # Process
 if [[ $DEBUG_MODE == true ]]; then
-    echo -e "[Debug] Running: .$INSTALL_PATH/nym-socks5-client init --id $CLIENT_ID --provider $CLIENT_SRV_ADDRESS\n"
+    echo -e "[Debug] Running: $INSTALL_PATH/nym-socks5-client init --id $CLIENT_ID --provider $CLIENT_SRV_ADDRESS\n"
 else
-    ".$INSTALL_PATH/nym-socks5-client" init --id "$CLIENT_ID" --provider "$CLIENT_SRV_ADDRESS"
+    "$INSTALL_PATH/nym-socks5-client" init --id "$CLIENT_ID" --provider "$CLIENT_SRV_ADDRESS"
 fi
