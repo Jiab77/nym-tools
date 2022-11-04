@@ -45,6 +45,7 @@ while [[ $# -gt 0 ]]; do
             else
                 INSTALL_USER="$2"
                 INSTALL_PATH="/home/$INSTALL_USER/nym-binaries"
+                CLIENT_INIT_LOG="$INSTALL_PATH/nym-socks5-client-init.log"
                 CLIENT_ADDRESS_FILE="/home/$INSTALL_USER/.nym-socks5-client-address"
                 shift
             fi
