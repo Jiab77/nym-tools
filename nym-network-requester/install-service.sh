@@ -58,10 +58,8 @@ StartLimitInterval=350
 StartLimitBurst=10
 
 [Service]
-User=$INSTALL_USER # replace this with whatever user you wish 
+User=$INSTALL_USER
 LimitNOFILE=65536
-# remember to add the '--enable-statistics' flag if running as part of a service grant and check the path to your nym-network-requester binary 
-# added '--open-proxy' flag to run it in open-proxy mode.
 ExecStart=$INSTALL_PATH/nym-network-requester --open-proxy
 KillSignal=SIGINT
 Restart=on-failure
@@ -79,10 +77,8 @@ StartLimitInterval=350
 StartLimitBurst=10
 
 [Service]
-User=$INSTALL_USER # replace this with whatever user you wish 
+User=$INSTALL_USER
 LimitNOFILE=65536
-# remember to add the '--enable-statistics' flag if running as part of a service grant and check the path to your nym-network-requester binary 
-# added '--open-proxy' flag to run it in open-proxy mode.
 ExecStart=$INSTALL_PATH/nym-network-requester --open-proxy
 KillSignal=SIGINT
 Restart=on-failure

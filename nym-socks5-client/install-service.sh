@@ -59,9 +59,9 @@ StartLimitInterval=350
 StartLimitBurst=10
 
 [Service]
-User=$INSTALL_USER # replace this with whatever user you wish 
+User=$INSTALL_USER
 LimitNOFILE=65536
-ExecStart=$INSTALL_PATH/nym-socks5-client run --id $CLIENT_ID # remember to check the path to your nym-socks5-client binary and the id of your client 
+ExecStart=$INSTALL_PATH/nym-socks5-client run --id $CLIENT_ID
 KillSignal=SIGINT
 Restart=on-failure
 RestartSec=30
@@ -78,9 +78,9 @@ StartLimitInterval=350
 StartLimitBurst=10
 
 [Service]
-User=$INSTALL_USER # replace this with whatever user you wish 
+User=$INSTALL_USER
 LimitNOFILE=65536
-ExecStart=$INSTALL_PATH/nym-socks5-client run --id $CLIENT_ID # remember to check the path to your nym-socks5-client binary and the id of your client 
+ExecStart=$INSTALL_PATH/nym-socks5-client run --id $CLIENT_ID
 KillSignal=SIGINT
 Restart=on-failure
 RestartSec=30
