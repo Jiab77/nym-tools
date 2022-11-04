@@ -100,5 +100,5 @@ $ sudo ./nym-socks5-client/install-service.sh
 
 ## Credits
 
-* @jiab77 - Project
-* @hackerschoice - Support
+* [@jiab77](https://github.com/Jiab77) - Project
+* [@hackerschoice](https://github.com/hackerschoice) - Support
