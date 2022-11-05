@@ -98,6 +98,101 @@ $ sudo ./nym-socks5-client/install-service.sh
 >
 > You can specify another user by adding `--user <username>` as argument.
 
+#### Configure applications
+
+Once the client service is running, you can configure your applications to use your local __Nym__ `SOCKS5` client.
+
+##### Chromium Browser
+
+Unlike [Tor](https://www.torproject.org/), [Nym](https://nymtech.net/) is not really made web for anonymous web browsing so even if it works, __expect it to be crazily slow!__
+
+* With user profile + Incognito mode:
+
+```console
+$ chromium-browser --new-window --incognito --proxy-server="socks5://localhost:1080" https://bbc.co.uk
+```
+
+* No user profile + Incognito mode:
+
+```console
+$ chromium-browser --temp-profile --new-window --incognito --proxy-server="socks5://localhost:1080" https://bbc.co.uk
+```
+
+##### Telegram Desktop
+
+Go to __Settings__ -> __Advanced__ -> __Connection type__ then apply the following settings:
+
+![image](https://user-images.githubusercontent.com/9881407/200093669-a380e123-d67a-4c6a-a286-ba752daea372.png)
+
+Click on __Save__ to finish.
+
+> I haven't tested calls within the proxy yet so please let me know if you tried with the option __Use proxy for calls__ checked and it worked.
+
+You should see this icon at the bottom left when enabled:
+
+![image](https://user-images.githubusercontent.com/9881407/200096295-9a45bd73-7dcc-4db9-bf54-eadc67bdb3a5.png)
+
+##### Proxychains
+
+To configure __proxychains__ to use your local __Nym__ `SOCKS5` client, you simply add a new line in the file `/etc/proxychains.conf`:
+
+```
+socks5         127.0.0.1 1080
+```
+
+Make sure to not have __Tor__ enabled in same time by commenting the line:
+
+```
+# socks5         127.0.0.1 9050
+```
+
+> You should be able to use several proxies with __proxychains__ but for simplicity I prefer use one single unique proxy. I might explain later how to make it work with several proxies.
+
+You can also run the following commands for patching the config file:
+
+```bash
+# Disable existing socks proxies
+sudo sed -e 's/socks4 /# socks4 /' -e 's/# # socks4 /# socks4 /' -e 's/socks5 /# socks5 /' -e 's/# # socks5 /# socks5 /' -i /etc/proxychains.conf
+
+# Enable Nym socks5 client proxy
+echo "socks5  127.0.0.1 1080" | sudo tee -a /etc/proxychains.conf
+```
+
+Now you can test if it worked. Here are some example commands / uses:
+
+* With `nmap`
+
+```console
+$ sudo proxychains4 -q nmap -A -vv -sS example.com
+```
+
+* With `testssl.sh`
+
+```console
+$ cd testssl.sh-3.0.5/
+$ sudo proxychains4 -q ./testssl.sh https://example.com
+```
+
+* With `w3m`
+
+```console
+$ sudo proxychains4 -q w3m https://bbc.co.uk
+```
+
+> Very slow but works.
+
+##### Curl
+
+```console
+$ curl -x "socks5://localhost:1080" https://example.com
+```
+
+##### Wappalyzer
+
+```console
+$ wappalyzer --pretty --proxy "socks5://localhost:1080" https://example.com
+```
+
 ## Credits
 
 * [@jiab77](https://github.com/Jiab77) - Project
