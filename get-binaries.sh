@@ -10,7 +10,7 @@
 # Version: 0.1.0
 
 # Options
-set -o xtrace
+set +o xtrace
 
 # Config
 NYM_FOLDER="$HOME/nym-binaries"
