@@ -8,6 +8,15 @@ This project has been made initialy to provide an easy way to deploy a __[Nym](h
 
 __*The project itself is still experimental and don't provide support for [custom gateways](https://nymtech.net/docs/stable/run-nym-nodes/nodes/gateways/) yet.*__
 
+## Supported platforms
+
+* __Server__
+  * Tested on __Ubuntu Server__ 20.04.x
+* __Client__
+  * Tested on __Pop!\_OS__ 20.04.x
+
+> Should work on any __Ubuntu__ 20.04.x based clients.
+
 ## Supported components
 
 * __Server__
