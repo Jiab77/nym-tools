@@ -118,13 +118,13 @@ Unlike [Tor](https://www.torproject.org/), [Nym](https://nymtech.net/) is not re
 * With user profile + Incognito mode:
 
 ```console
-$ chromium-browser --new-window --incognito --proxy-server="socks5://localhost:1080" https://bbc.co.uk
+$ chromium-browser --new-window --incognito --proxy-server="socks5://localhost:1080" https://example.com
 ```
 
 * No user profile + Incognito mode:
 
 ```console
-$ chromium-browser --temp-profile --new-window --incognito --proxy-server="socks5://localhost:1080" https://bbc.co.uk
+$ chromium-browser --temp-profile --new-window --incognito --proxy-server="socks5://localhost:1080" https://example.com
 ```
 
 ##### Telegram Desktop
@@ -185,7 +185,7 @@ $ sudo proxychains4 -q ./testssl.sh https://example.com
 * With `w3m`
 
 ```console
-$ sudo proxychains4 -q w3m https://bbc.co.uk
+$ sudo proxychains4 -q w3m https://example.com
 ```
 
 > Very slow but works.
