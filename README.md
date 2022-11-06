@@ -75,6 +75,12 @@ $ sudo ./nym-network-requester/install-service.sh
 >
 > You can specify another user by adding `--user <username>` as argument.
 
+#### Watch activities
+
+```console
+$ sudo journalctl -fn1000 -u nym-client.service -u nym-network-requester.service
+```
+
 ### Client
 
 This section is only required for those who want to connect their apps to an existing __Nym__ *open proxy* server.
@@ -106,6 +112,12 @@ $ sudo ./nym-socks5-client/install-service.sh
 > __The script assume that you've created a dedicated `nym` user.__
 >
 > You can specify another user by adding `--user <username>` as argument.
+
+#### Watch activities
+
+```console
+$ sudo journalctl -fn1000 -u nym-socks5-client.service
+```
 
 #### Configure applications
 
