@@ -24,10 +24,12 @@ mkdir -p "$BACKUP_FOLDER"
 mv "$NYM_FOLDER/nym-*" "$BACKUP_FOLDER/" 2>/dev/null
 
 # Download all binaries
+echo -ne "\nDownloading Nym binaries version $DOWNLOAD_VERSION... "
 for BIN in "${BINARIES[@]}" ; do
     wget "$DOWNLOAD_URL/$BIN" -O "$NYM_FOLDER/$BIN" 2>/dev/null
-    chmod -v +x "$NYM_FOLDER/$BIN"
+    chmod +x "$NYM_FOLDER/$BIN"
 done
 
 # Show downloaded binaries
+echo -e "finished.\n\nShowing content:\n"
 ls -halF --color=always "$NYM_FOLDER"
