@@ -8,6 +8,8 @@ This project has been made initialy to provide an easy way to deploy a __[Nym](h
 
 __*The project itself is still experimental and don't provide support for [custom gateways](https://nymtech.net/docs/stable/run-nym-nodes/nodes/gateways/) yet.*__
 
+> If you are looking for something much simpler just to run applications like Electrum Wallet, Keybase or Telegram desktop, please skip this project and take a look at [NymConnect](https://nymtech.net/docs/stable/quickstart/nym-connect/) or [here](https://nymtech.net/docs/stable/quickstart/socks5).
+
 ## Supported platforms
 
 * __Server__
