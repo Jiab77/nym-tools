@@ -20,6 +20,12 @@ CLIENT_ID="requester-client"
 CLIENT_INIT_LOG="$INSTALL_PATH/nym-client-init.log"
 PROVIDER_ADDRESS_FILE="$INSTALL_PATH/.nym-provider-address"
 
+# Check if initializing for default user
+[[ $# -eq 0 && ! $(id -u) -eq 0 ]] && echo -e "\nYou must run this script as 'root' or with 'sudo'.\n" && exit 1
+
+# Check if initializing for given user
+[[ $# -eq 2 && ! $(id -u) -eq 0 && ! $(id -u -n) == "$2" ]] && echo -e "\nYou must run this script as 'root' or with 'sudo'.\n" && exit 1
+
 # Arguments
 while [[ $# -gt 0 ]]; do
     case $1 in
@@ -47,11 +53,20 @@ while [[ $# -gt 0 ]]; do
     shift
 done
 
+# Fix run permission
+if [[ $(id -u) -eq 0 ]]; then
+    RUN_CMD="runuser -u $INSTALL_USER --"
+fi
+
 # Process
 if [[ $DEBUG_MODE == true ]]; then
-    echo -e "[Debug] Running: $INSTALL_PATH/nym-client init --id $CLIENT_ID &> $CLIENT_INIT_LOG &\n"
+    echo -e "[Debug] Running: $RUN_CMD $INSTALL_PATH/nym-client init --id $CLIENT_ID &> $CLIENT_INIT_LOG &\n"
 else
-    "$INSTALL_PATH/nym-client" init --id $CLIENT_ID &> "$CLIENT_INIT_LOG" &
+   if [[ -n "$RUN_CMD" ]]; then
+       $RUN_CMD "$INSTALL_PATH/nym-client" init --id $CLIENT_ID &> "$CLIENT_INIT_LOG" &
+   else
+       "$INSTALL_PATH/nym-client" init --id $CLIENT_ID &> "$CLIENT_INIT_LOG" &
+   fi
 fi
 
 # Result
@@ -62,3 +77,7 @@ if [[ $DEBUG_MODE == false ]]; then
     echo -e "\nPlease note this address to later initialize the socks5 client with the '--provider' argument.\n"
     echo -n "$(grep 'The address of this client is:' "$CLIENT_INIT_LOG" | awk '{ print $7 }')" > "$PROVIDER_ADDRESS_FILE"
 fi
+
+# Fix permissions
+chown "$INSTALL_USER." "$CLIENT_INIT_LOG"
+chown "$INSTALL_USER." "$PROVIDER_ADDRESS_FILE"
